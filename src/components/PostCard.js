@@ -17,8 +17,8 @@ export default function PostCard(props) {
     //function commentOnPost() {}
 
     return (
-        <Card fluid>
-            <Card.Content>
+        <Card fluid >
+            <Card.Content stackable="true">
 
                 <Image
                     floated='right'

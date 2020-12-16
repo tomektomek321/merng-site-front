@@ -16,3 +16,8 @@ code {
 .ui.teal.buttons .button:focus {
   background-color: #00b5ad;
 }
+
+.ui.grid>.row>.column {
+  margin-top: 0;
+  margin-bottom: 15px;
+}

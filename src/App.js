@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
 import { AuthProvider } from './context/auth';
 import AuthRoute from './util/AuthRoute';
+import './index.css';
 
 import MenuBar from './components/MenuBar'
 import Home from './pages/Home'
