@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React/*, {useContext}*/ from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
@@ -8,12 +8,7 @@ import { FETCH_POSTS_QUERY } from '../util/graphql';
 
 //import {AuthContext} from './../util/AuthRoute'
 
-function PostForm() {
-
-  //const {user} = useContext(AuthContext);
-
-
-
+function PostForm({ttestProp, ttestPropValue}) {
 
   const { values, onChange, onSubmit } = useForm(createPostCallback, {
     body: ''
@@ -25,9 +20,17 @@ function PostForm() {
       const data = proxy.readQuery({
         query: FETCH_POSTS_QUERY
       });
-      data.getPosts = [result.data.createPost, ...data.getPosts];
-      proxy.writeQuery({ query: FETCH_POSTS_QUERY, data });
+      let newData = [...data.getPosts];
+      newData = [result.data.createPost, ...newData];
+      //data.getPosts = [result.data.createPost, ...data.getPosts];
+      proxy.writeQuery({ query: FETCH_POSTS_QUERY, data: {
+        ...data,
+        getPosts: {
+          newData
+        }
+      } });
       values.body = '';
+      ttestProp(++ttestPropValue);
     }
   });
 

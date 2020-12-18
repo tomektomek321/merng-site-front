@@ -12,10 +12,7 @@ import MyPopup from '../util/MyPopup';
 export default function PostCard(props) {
     const { user } = useContext(AuthContext);
 
-    const {body, createdAt, id, username, likeCount, commentCount = 0, likes} = props.post;
-
-    //function likePost() {}
-    //function commentOnPost() {}
+    const {body, createdAt, id, username, likeCount, commentCount, likes} = props.post;
 
     return (
         <Card fluid >

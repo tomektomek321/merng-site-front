@@ -6,21 +6,19 @@ import { Button, Card, Grid, Image, Icon, Form, Label } from 'semantic-ui-react'
 
 import { AuthContext } from '../context/auth';
 import LikeButton from '../components/LikeButton';
+import LikeCommentButton from '../components/LikeCommentButton';
 import DeleteButton from '../components/DeleteButton';
 import MyPopup from '../util/MyPopup';
 
 function SinglePost(props) {
   const postId = props.match.params.postId;
   const { user } = useContext(AuthContext);
-  console.log(postId);
 
   const commentInputRef = useRef(null);
 
   const [comment, setComment] = useState('');
 
-  const {
-    data
-  } = useQuery(FETCH_POST_QUERY, {
+  const { data } = useQuery(FETCH_POST_QUERY, {
     variables: {
       postId
     }
@@ -42,7 +40,7 @@ function SinglePost(props) {
   }
 
   let postMarkup;
-  console.log(data);
+  //console.log(data);
   if (!data) {
     postMarkup = <p>Loading post..</p>;
   } else {
@@ -135,6 +133,7 @@ function SinglePost(props) {
                   <Card.Header>{comment.username}</Card.Header>
                   <Card.Meta>{moment(comment.createdAt).fromNow()}</Card.Meta>
                   <Card.Description>{comment.body}</Card.Description>
+                  <LikeCommentButton user={user} postId={id} commentData={ [comment.id, comment.likes] } />
                 </Card.Content>
               </Card>
             ))}
@@ -155,6 +154,11 @@ const SUBMIT_COMMENT_MUTATION = gql`
         body
         createdAt
         username
+
+        likes {
+          id
+          username
+        }
       }
       commentCount
     }
@@ -178,6 +182,10 @@ const FETCH_POST_QUERY = gql`
         username
         createdAt
         body
+        likes {
+          id
+          username
+        }
       }
     }
   }
