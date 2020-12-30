@@ -10,8 +10,6 @@ export  const FETCH_POSTS_QUERY = gql`
                 username
             }
 
-
-
             comments {
                 id username createdAt body
 
@@ -25,15 +23,6 @@ export  const FETCH_POSTS_QUERY = gql`
 
 `;
 
-
-/*
-export  const FETCH_USER_POSTS_QUERY = gql`
-    query($userName: String!) {
-        getPostsOfUser(userName: $userName) {
-            id body createdAt username likeCount commentCount
-        }
-    }
-`;*/
 
 export  const FETCH_MY_POSTS_QUERY = gql`
     query {
@@ -56,19 +45,23 @@ export const FETCH_USER_POSTS_QUERY = gql`
 
 `;
 
+export const FETCH_USER_LIKED_POSTS_QUERY = gql`
 
-/*
+    query($userId: ID!) {
+        getLikedPostsOfUser(userId: $userId) {
+            id
+            body
+            username
+            likeCount
+            commentCount
+
             likes {
                 username
             }
 
-
-
             comments {
                 id username createdAt body
-
-                likes {
-                    username
-                }
             }
-            */
+        }
+    }
+`;
