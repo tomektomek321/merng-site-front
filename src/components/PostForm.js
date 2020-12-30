@@ -55,7 +55,6 @@ function PostForm({ttestProp, ttestPropValue}) {
             </Button>
         </Form.Field>
         </Form>
-        {console.log(error)}
         {error && (
             <div className="ui error message" style={{ marginBottom: 20 }}>
             <ul className="list">

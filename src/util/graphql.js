@@ -24,3 +24,51 @@ export  const FETCH_POSTS_QUERY = gql`
     }
 
 `;
+
+
+/*
+export  const FETCH_USER_POSTS_QUERY = gql`
+    query($userName: String!) {
+        getPostsOfUser(userName: $userName) {
+            id body createdAt username likeCount commentCount
+        }
+    }
+`;*/
+
+export  const FETCH_MY_POSTS_QUERY = gql`
+    query {
+        getMyPosts {
+            id body createdAt username likeCount commentCount
+        }
+    }
+
+`;
+
+
+export const FETCH_USER_POSTS_QUERY = gql`
+
+    query($userId: ID!) {
+        getPostsOfUser(userId: $userId) {
+            id
+            body
+        }
+    }
+
+`;
+
+
+/*
+            likes {
+                username
+            }
+
+
+
+            comments {
+                id username createdAt body
+
+                likes {
+                    username
+                }
+            }
+            */

@@ -22,6 +22,8 @@ export default function PostCard(props) {
                     floated='right'
                     size='mini'
                     src='https://react.semantic-ui.com/images/avatar/large/molly.png'
+                    as={Link}
+                    to={`/profile/${username}`}
                 />
 
                 <Card.Header>{username}</Card.Header>

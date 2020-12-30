@@ -23,6 +23,7 @@ export default function Home() {
     const [testProp, setTestProp] = useState(1);
 
     const resp = useQuery(FETCH_POSTS_QUERY);
+    console.log(resp);
 
     return (
         <Grid columns={2} >

@@ -44,6 +44,7 @@ function SinglePost(props) {
   if (!data) {
     postMarkup = <p>Loading post..</p>;
   } else {
+    console.log(data);
     const {
       id,
       body,
