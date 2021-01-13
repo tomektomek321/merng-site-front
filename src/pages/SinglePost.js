@@ -56,17 +56,30 @@ function SinglePost(props) {
       commentCount
     } = data.getPost;
 
+    let gridPhoto, gridComments;
+    if(window.innerWidth < 600) {
+      gridPhoto = 6;
+      gridComments = 16;
+    } else {
+      gridPhoto = 2;
+      gridComments = 10;
+    }
+
+
+
+
+
     postMarkup = (
       <Grid>
         <Grid.Row>
-          <Grid.Column width={2}>
+          <Grid.Column width={gridPhoto}>
             <Image
               src="https://react.semantic-ui.com/images/avatar/large/molly.png"
               size="small"
               float="right"
             />
           </Grid.Column>
-          <Grid.Column width={10}>
+          <Grid.Column width={gridComments}>
             <Card fluid>
               <Card.Content>
                 <Card.Header>{username}</Card.Header>

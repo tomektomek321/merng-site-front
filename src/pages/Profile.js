@@ -1,15 +1,18 @@
 import React, { useContext } from 'react'
 
-import { FETCH_USER_POSTS_QUERY,
-    FETCH_USER_LIKED_POSTS_QUERY, FETCH_MY_POSTS_QUERY } from '../util/graphql'
+import { FETCH_USER_POSTS_QUERY, FETCH_USER_COMMENTED_POSTS_QUERY,
+    FETCH_USER_LIKED_POSTS_QUERY } from '../util/graphql'
 
-import { CardContent, Grid, GridColumn } from 'semantic-ui-react'
+import { CardContent, Grid } from 'semantic-ui-react'
 //import PostCard from '../components/PostCard'
 import { useQuery } from '@apollo/react-hooks'
 import { AuthContext } from '../context/auth';
 import DeleteButton from '../components/DeleteButton';
-import { Button, Card, Icon, Label, Image } from 'semantic-ui-react';
+import { Card, Image } from 'semantic-ui-react';
 import PostCard from '../components/PostCard';
+
+import './profile.css';
+
 export default function Profile() {
 
     const pathname = window.location.pathname;
@@ -35,8 +38,44 @@ export default function Profile() {
     });
     console.log(resp2);
 
+
+    const resp3 = useQuery(FETCH_USER_COMMENTED_POSTS_QUERY, {
+        variables: {
+            userId: userId33
+        }
+    });
+    console.log(resp3);
+
+
+    let wid;
+    if(window.innerWidth < 700) {
+        wid = 1;
+    } else {
+        wid = 2;
+    }
+
     return (
-        <Grid columns={2} >
+        <Grid columns={wid} >
+
+                <h3 className="ui attached center segment topheadek">
+                    Top Attached
+                </h3>
+
+            <div className="ui attached segment">
+                <p>
+                    lorem loerm lorem loerm lorem loerm lorem loerm lorem loerm lorem loerm lorem
+                    lorem loerm lorem loerm lorem loerm lorem loerm lorem loerm lorem loerm lorem
+                    lorem loerm lorem loerm lorem loerm lorem loerm lorem loerm lorem loerm lorem
+                    lorem loerm lorem loerm lorem loerm lorem loerm lorem loerm lorem loerm lorem
+                </p>
+            </div>
+
+            <h2 className="ui center aligned icon header">
+                <i className="circular users icon"></i>
+                Friends
+            </h2>
+
+
             {/* <Grid.Row>
             <div class="ui piled segment">
                 <h2 class="ui header">
@@ -46,7 +85,7 @@ export default function Profile() {
             </div>
             </Grid.Row> */}
             <Grid.Row>
-                <div className="ui card">
+                <div className="ui card cardik">
                     <div className="image">
                         <img alt="nic" src="https://react.semantic-ui.com/images/avatar/large/molly.png" />
                     </div>
@@ -67,11 +106,11 @@ export default function Profile() {
                     </div>
                 </div>
             </Grid.Row>
-            <Grid.Row >
+            <Grid.Row columns={wid} className="myPostsWrapper" >
                 {resp.loading ? (
                     <h1>loading your posts..</h1>
                 ) : (
-                    <div>
+                    <>
                         <h2 className="ui header">
                             <img alt="nic" src="https://semantic-ui.com/images/icons/plugin.png" />
                             <div className="content">
@@ -83,8 +122,8 @@ export default function Profile() {
                         </h2>
 
                         {resp.data && resp.data.getPostsOfUser.map(post => (
-                        <Grid.Column key={post.id} >
-                            <Card fluid >
+                        <Grid.Column column={8} key={post.id} >
+                            <Card fluid>
                                 <Card.Content stackable="true">
                                 <Image
                                     floated='right'
@@ -106,25 +145,52 @@ export default function Profile() {
                             </Card>
                         </Grid.Column>
                     ))}
-                    </div>
+                    </>
+                )}
+            </Grid.Row>
+            <Grid.Row className="myLikedPostsWrapper">
+                {resp2.loading ? (
+                    <h1>loading Liked posts..</h1>
+                ) : (
+                    <>
+                        <Grid.Column className="sixteen wide">
+                            <h2 className="ui header">
+                                <img alt="nic" src="https://semantic-ui.com/images/icons/plugin.png" />
+                                <div className="content">
+                                    Polubione posty
+                                    <div className="sub header">
+                                    {resp2.data && resp2.data.getLikedPostsOfUser.length} Post(s)
+                                    </div>
+                                </div>
+                            </h2>
+                        </Grid.Column>
+
+
+                        {resp2.data && resp2.data.getLikedPostsOfUser.map(post => (
+
+                            <Grid.Column key={post.id} >
+                                <PostCard fluid post={post} />
+                            </Grid.Column>
+                        ))}
+                    </>
                 )}
             </Grid.Row>
             <Grid.Row >
-                {resp2.loading ? (
-                    <h1>loading Liked posts..</h1>
+                {resp3.loading ? (
+                    <h1>loading Commented posts..</h1>
                 ) : (
                     <div>
                         <h2 className="ui header">
                             <img alt="nic" src="https://semantic-ui.com/images/icons/plugin.png" />
                             <div className="content">
-                                Polubione posty
+                                Komentowane posty
                                 <div className="sub header">
-                                {resp2.data && resp2.data.getLikedPostsOfUser.length} Post(s)
+                                {resp3.data && resp3.data.getCommentedPostsOfUser.length} Post(s)
                                 </div>
                             </div>
                         </h2>
 
-                        {resp2.data && resp2.data.getLikedPostsOfUser.map(post => (
+                        {resp3.data && resp3.data.getCommentedPostsOfUser.map(post => (
 
                        <Grid.Column key={post.id} >
                            <PostCard post={post} />

@@ -25,8 +25,19 @@ export default function Home() {
     const resp = useQuery(FETCH_POSTS_QUERY);
     console.log(resp);
 
+
+
+
+    console.log(window.innerWidth);
+    let col;
+    if(window.innerWidth < 600) {
+        col = 1;
+    } else {
+        col = 2;
+    }
+
     return (
-        <Grid columns={2} >
+        <Grid columns={col} >
             <Grid.Row >
                 {user && (
                     <Grid.Column>

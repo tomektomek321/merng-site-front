@@ -1,0 +1,40 @@
+
+@media screen and (max-width: 700px ) {
+
+    .topheadek {
+        margin-top: 15px !important;
+    }
+
+
+
+
+    .cardik {
+        margin-right: auto !important;
+        margin-left: auto !important;
+    }
+
+    .PolTwitterek {
+        color: red !important;
+
+    }
+
+
+
+    .myPostsWrapper .column .card {
+        width: 100%;
+    }
+
+    .myLikedPostsWrapper .column .card {
+        width: 100%;
+    }
+
+
+
+
+
+
+}
+.myPostsWrapper .header {
+    width: 100%;
+}
+

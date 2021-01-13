@@ -65,3 +65,25 @@ export const FETCH_USER_LIKED_POSTS_QUERY = gql`
         }
     }
 `;
+
+
+export const FETCH_USER_COMMENTED_POSTS_QUERY = gql`
+
+    query($userId: ID!) {
+        getCommentedPostsOfUser(userId: $userId) {
+            id
+            body
+            username
+            likeCount
+            commentCount
+
+            likes {
+                username
+            }
+
+            comments {
+                id username createdAt body
+            }
+        }
+    }
+`;

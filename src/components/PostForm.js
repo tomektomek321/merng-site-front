@@ -31,6 +31,7 @@ function PostForm({ttestProp, ttestPropValue}) {
       } });
       values.body = '';
       ttestProp(++ttestPropValue);
+      window.location.href = "/";
     }
   });
 

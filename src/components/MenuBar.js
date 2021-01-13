@@ -20,6 +20,7 @@ export default function MenuBar() {
 
     const menuBar = user ? (
         <Menu pointing secondary size="massive" color="teal">
+
           <Menu.Item
             name={user.username}
             active={activeItem === 'home'}
